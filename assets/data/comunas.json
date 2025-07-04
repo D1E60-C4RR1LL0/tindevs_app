@@ -1,0 +1,1386 @@
+[
+    {
+        "region": "Arica y Parinacota",
+        "nombre": "Arica"
+    },
+    {
+        "region": "Arica y Parinacota",
+        "nombre": "Camarones"
+    },
+    {
+        "region": "Arica y Parinacota",
+        "nombre": "Putre"
+    },
+    {
+        "region": "Arica y Parinacota",
+        "nombre": "General Lagos"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Iquique"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Alto Hospicio"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Pozo Almonte"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Camiña"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Colchane"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Huara"
+    },
+    {
+        "region": "Tarapacá",
+        "nombre": "Pica"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Antofagasta"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Mejillones"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Sierra Gorda"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Taltal"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Calama"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Ollagüe"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "San Pedro de Atacama"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "Tocopilla"
+    },
+    {
+        "region": "Antofagasta",
+        "nombre": "María Elena"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Copiapó"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Caldera"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Tierra Amarilla"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Chañaral"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Diego de Almagro"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Vallenar"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Alto del Carmen"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Freirina"
+    },
+    {
+        "region": "Atacama",
+        "nombre": "Huasco"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "La Serena"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Coquimbo"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Andacollo"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "La Higuera"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Paiguano"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Vicuña"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Illapel"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Canela"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Los Vilos"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Salamanca"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Ovalle"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Combarbalá"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Monte Patria"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Punitaqui"
+    },
+    {
+        "region": "Coquimbo",
+        "nombre": "Río Hurtado"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Valparaíso"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Casablanca"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Concón"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Juan Fernández"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Puchuncaví"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Quintero"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Viña del Mar"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Isla de Pascua"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Los Andes"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Calle Larga"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Rinconada"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "San Esteban"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "La Ligua"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Cabildo"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Papudo"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Petorca"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Zapallar"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Quillota"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Calera"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Hijuelas"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "La Cruz"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Nogales"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "San Antonio"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Algarrobo"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Cartagena"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "El Quisco"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "El Tabo"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Santo Domingo"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "San Felipe"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Catemu"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Llaillay"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Panquehue"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Putaendo"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Santa María"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Quilpué"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Limache"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Olmué"
+    },
+    {
+        "region": "Valparaíso",
+        "nombre": "Villa Alemana"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Rancagua"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Codegua"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Coinco"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Coltauco"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Doñihue"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Graneros"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Las Cabras"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Machalí"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Malloa"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Mostazal"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Olivar"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Peumo"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Pichidegua"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Quinta de Tilcoco"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Rengo"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Requínoa"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "San Vicente"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Pichilemu"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "La Estrella"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Litueche"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Marchihue"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Navidad"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Paredones"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "San Fernando"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Chépica"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Chimbarongo"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Lolol"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Nancagua"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Palmilla"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Peralillo"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Placilla"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Pumanque"
+    },
+    {
+        "region": "Región del Libertador Gral. Bernardo O’Higgins",
+        "nombre": "Santa Cruz"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Talca"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Constitución"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Curepto"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Empedrado"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Maule"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Pelarco"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Pencahue"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Río Claro"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "San Clemente"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "San Rafael"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Cauquenes"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Chanco"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Pelluhue"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Curicó"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Hualañé"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Licantén"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Molina"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Rauco"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Romeral"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Sagrada Familia"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Teno"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Vichuquén"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Linares"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Colbún"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Longaví"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Parral"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Retiro"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "San Javier"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Villa Alegre"
+    },
+    {
+        "region": "Región del Maule",
+        "nombre": "Yerbas Buenas"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Cobquecura"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Coelemu"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Ninhue"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Portezuelo"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Quirihue"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Ránquil"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Treguaco"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Bulnes"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Chillán Viejo"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Chillán"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "El Carmen"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Pemuco"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Pinto"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Quillón"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "San Ignacio"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Yungay"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Coihueco"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "Ñiquén"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "San Carlos"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "San Fabián"
+    },
+    {
+        "region": "Región de Ñuble",
+        "nombre": "San Nicolás"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Concepción"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Coronel"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Chiguayante"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Florida"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Hualqui"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Lota"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Penco"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "San Pedro de la Paz"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Santa Juana"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Talcahuano"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Tomé"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Hualpén"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Lebu"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Arauco"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Cañete"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Contulmo"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Curanilahue"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Los Álamos"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Tirúa"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Los Ángeles"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Antuco"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Cabrero"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Laja"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Mulchén"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Nacimiento"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Negrete"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Quilaco"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Quilleco"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "San Rosendo"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Santa Bárbara"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Tucapel"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Yumbel"
+    },
+    {
+        "region": "Región del Biobío",
+        "nombre": "Alto Biobío"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Temuco"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Carahue"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Cunco"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Curarrehue"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Freire"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Galvarino"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Gorbea"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Lautaro"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Loncoche"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Melipeuco"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Nueva Imperial"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Padre las Casas"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Perquenco"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Pitrufquén"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Pucón"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Saavedra"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Teodoro Schmidt"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Toltén"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Vilcún"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Villarrica"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Cholchol"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Angol"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Collipulli"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Curacautín"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Ercilla"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Lonquimay"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Los Sauces"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Lumaco"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Purén"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Renaico"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Traiguén"
+    },
+    {
+        "region": "Región de la Araucanía",
+        "nombre": "Victoria"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Valdivia"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Corral"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Lanco"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Los Lagos"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Máfil"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Mariquina"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Paillaco"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Panguipulli"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "La Unión"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Futrono"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Lago Ranco"
+    },
+    {
+        "region": "Región de Los Ríos",
+        "nombre": "Río Bueno"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Puerto Montt"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Calbuco"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Cochamó"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Fresia"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Frutillar"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Los Muermos"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Llanquihue"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Maullín"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Puerto Varas"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Castro"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Ancud"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Chonchi"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Curaco de Vélez"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Dalcahue"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Puqueldón"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Queilén"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Quellón"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Quemchi"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Quinchao"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Osorno"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Puerto Octay"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Purranque"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Puyehue"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Río Negro"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "San Juan de la Costa"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "San Pablo"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Chaitén"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Futaleufú"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Hualaihué"
+    },
+    {
+        "region": "Región de Los Lagos",
+        "nombre": "Palena"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Coihaique"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Lago Verde"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Aisén"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Cisnes"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Guaitecas"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Cochrane"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "O’Higgins"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Tortel"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Chile Chico"
+    },
+    {
+        "region": "Región Aisén del Gral. Carlos Ibáñez del Campo",
+        "nombre": "Río Ibáñez"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Punta Arenas"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Laguna Blanca"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Río Verde"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "San Gregorio"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Cabo de Hornos (Ex Navarino)"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Antártica"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Porvenir"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Primavera"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Timaukel"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Natales"
+    },
+    {
+        "region": "Región de Magallanes y de la Antártica Chilena",
+        "nombre": "Torres del Paine"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Cerrillos"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Cerro Navia"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Conchalí"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "El Bosque"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Estación Central"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Huechuraba"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Independencia"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "La Cisterna"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "La Florida"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "La Granja"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "La Pintana"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "La Reina"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Las Condes"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Lo Barnechea"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Lo Espejo"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Lo Prado"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Macul"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Maipú"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Ñuñoa"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Pedro Aguirre Cerda"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Peñalolén"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Providencia"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Pudahuel"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Quilicura"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Quinta Normal"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Recoleta"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Renca"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Santiago"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "San Joaquín"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "San Miguel"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "San Ramón"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Vitacura"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Puente Alto"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Pirque"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "San José de Maipo"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Colina"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Lampa"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Tiltil"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "San Bernardo"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Buin"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Calera de Tango"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Paine"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Melipilla"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Alhué"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Curacaví"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "María Pinto"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "San Pedro"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Talagante"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "El Monte"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Isla de Maipo"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Padre Hurtado"
+    },
+    {
+        "region": "Región Metropolitana de Santiago",
+        "nombre": "Peñaflor"
+    }
+]

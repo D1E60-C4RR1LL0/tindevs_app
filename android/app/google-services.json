@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "305613084851",
+    "project_id": "tindevs-1f6ed",
+    "storage_bucket": "tindevs-1f6ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305613084851:android:18591c9de907abe2fb38c6",
+        "android_client_info": {
+          "package_name": "com.example.tindevs_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmlPq2ar-1OV20zT3UlsEHUmb4yFmIQbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
