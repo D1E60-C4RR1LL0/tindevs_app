@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tindevs_app/screens/empleador_home_screen.dart';
 import 'package:tindevs_app/screens/postulante_home_screen.dart';
 import 'package:tindevs_app/screens/register_screen.dart';
+import 'package:tindevs_app/utils/auth_errors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,10 +25,28 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
+    // Validar campos antes de enviar a Firebase
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    
+    final validationError = AuthErrors.validateLoginFields(email, password);
+    if (validationError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(validationError),
+          backgroundColor: Colors.red,
+        ),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: email,
+        password: password,
       );
 
       final userId = userCredential.user!.uid;
@@ -59,21 +78,34 @@ class _LoginScreenState extends State<LoginScreen> {
         } else {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(const SnackBar(content: Text('Rol no reconocido.')));
+          ).showSnackBar(const SnackBar(
+            content: Text('Rol de usuario no reconocido. Contacta al soporte técnico.'),
+            backgroundColor: Colors.orange,
+          ));
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Datos de usuario no encontrados.')),
+          const SnackBar(
+            content: Text('No se encontraron los datos de usuario. Contacta al soporte técnico.'),
+            backgroundColor: Colors.orange,
+          ),
         );
       }
     } on FirebaseAuthException catch (e) {
+      final customMessage = AuthErrors.getCustomErrorMessage(e.code);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de autenticación: ${e.message}')),
+        SnackBar(
+          content: Text(customMessage),
+          backgroundColor: Colors.red,
+        ),
       );
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+      ).showSnackBar(SnackBar(
+        content: Text('Error inesperado. Verifica tu conexión e intenta nuevamente.'),
+        backgroundColor: Colors.red,
+      ));
     } finally {
       setState(() {
         _isLoading = false;

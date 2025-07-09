@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'admin_home_screen.dart';
+import 'package:tindevs_app/utils/auth_errors.dart';
+import 'package:tindevs_app/main.dart';
 
 class AdminLoginScreen extends StatefulWidget {
+  const AdminLoginScreen({super.key});
+
   @override
-  _AdminLoginScreenState createState() => _AdminLoginScreenState();
+  AdminLoginScreenState createState() => AdminLoginScreenState();
 }
 
-class _AdminLoginScreenState extends State<AdminLoginScreen> {
+class AdminLoginScreenState extends State<AdminLoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -23,24 +25,62 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
       _errorMessage = null;
     });
 
+    // Validar campos antes de enviar a Firebase
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    
+    final validationError = AuthErrors.validateLoginFields(email, password);
+    if (validationError != null) {
+      setState(() {
+        _errorMessage = validationError;
+        _loading = false;
+      });
+      return;
+    }
+
     try {
       // Autenticación con Firebase Auth
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: email,
+        password: password,
       );
 
-      // Verificar si el usuario tiene rol "admin" en Firestore
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('usuarios')
-          .doc(userCredential.user!.uid)
-          .get();
+      // Verificar si el usuario tiene rol "admin" en Firestore con retry logic
+      DocumentSnapshot userDoc;
+      int maxRetries = 3;
+      int retryCount = 0;
+      
+      do {
+        userDoc = await FirebaseFirestore.instance
+            .collection('usuarios')
+            .doc(userCredential.user!.uid)
+            .get();
+        
+        if (!userDoc.exists && retryCount < maxRetries) {
+          // Esperar un poco antes de reintentar
+          await Future.delayed(Duration(milliseconds: 500 * (retryCount + 1)));
+          retryCount++;
+        } else {
+          break;
+        }
+      } while (retryCount < maxRetries);
 
       if (userDoc.exists && userDoc['rol'] == 'admin') {
-        // Si es admin → navegar al panel
-        Navigator.pushReplacement(
+        print('Admin login exitoso, navegando al panel...'); // Debug
+        
+        // Limpiar cualquier error previo
+        setState(() {
+          _errorMessage = null;
+        });
+        
+        // Esperar un momento para asegurar que todo esté sincronizado
+        await Future.delayed(const Duration(milliseconds: 300));
+        
+        // Navegar al InitialRouter para que maneje la navegación reactiva
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => AdminHomeScreen()),
+          MaterialPageRoute(builder: (context) => const InitialRouter()),
+          (route) => false,
         );
       } else {
         // No es admin → mostrar error y cerrar sesión
@@ -50,12 +90,13 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
         });
       }
     } on FirebaseAuthException catch (e) {
+      final customMessage = AuthErrors.getCustomErrorMessage(e.code);
       setState(() {
-        _errorMessage = e.message;
+        _errorMessage = customMessage;
       });
     } catch (e) {
       setState(() {
-        _errorMessage = 'Error desconocido: $e';
+        _errorMessage = 'Error inesperado. Verifica tu conexión e intenta nuevamente.';
       });
     } finally {
       setState(() {

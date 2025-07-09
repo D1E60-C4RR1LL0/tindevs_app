@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'crear_propuesta_screen.dart';
-import 'interesados_screen.dart';
-import 'matches_empleador_screen.dart';
+import 'package:tindevs_app/utils/app_themes.dart';
 
 class PerfilEmpleadorScreen extends StatefulWidget {
   const PerfilEmpleadorScreen({super.key});
@@ -19,6 +17,45 @@ class _PerfilEmpleadorScreenState extends State<PerfilEmpleadorScreen> {
   final _ubicacionController = TextEditingController();
   final _descripcionController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _cargarPerfilEmpleador();
+  }
+
+  @override
+  void dispose() {
+    _empresaController.dispose();
+    _rubroController.dispose();
+    _ubicacionController.dispose();
+    _descripcionController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _cargarPerfilEmpleador() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    try {
+      final doc = await FirebaseFirestore.instance
+          .collection('usuarios')
+          .doc(user.uid)
+          .get();
+
+      if (doc.exists) {
+        final data = doc.data() ?? {};
+        setState(() {
+          _empresaController.text = data['empresa'] ?? '';
+          _rubroController.text = data['rubro'] ?? '';
+          _ubicacionController.text = data['ubicacion'] ?? '';
+          _descripcionController.text = data['descripcion'] ?? '';
+        });
+      }
+    } catch (e) {
+      print('Error al cargar perfil del empleador: $e');
+    }
+  }
+
   Future<void> _guardarPerfil() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -27,9 +64,9 @@ class _PerfilEmpleadorScreenState extends State<PerfilEmpleadorScreen> {
 
     try {
       await FirebaseFirestore.instance
-          .collection('perfiles_empleadores')
+          .collection('usuarios')
           .doc(user.uid)
-          .set({
+          .update({
             'empresa': _empresaController.text.trim(),
             'rubro': _rubroController.text.trim(),
             'ubicacion': _ubicacionController.text.trim(),
@@ -50,7 +87,13 @@ class _PerfilEmpleadorScreenState extends State<PerfilEmpleadorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Perfil Empleador')),
+      backgroundColor: AppThemes.empleadorBackground,
+      appBar: AppBar(
+        title: const Text('Perfil Empleador'),
+        backgroundColor: AppThemes.empleadorPrimary,
+        foregroundColor: Colors.white,
+        elevation: 2,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -86,46 +129,31 @@ class _PerfilEmpleadorScreenState extends State<PerfilEmpleadorScreen> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _guardarPerfil,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppThemes.empleadorPrimary,
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text('Guardar perfil'),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const CrearPropuestaScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Crear propuesta de trabajo'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const InteresadosScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Ver interesados'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const MatchesEmpleadorScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Ver matches'),
-              ),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacementNamed(context, '/');
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Error al cerrar sesión: $e'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
                 child: const Text('Cerrar sesión'),
               ),
             ],

@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'matches_postulante_screen.dart';
+import 'package:tindevs_app/utils/app_themes.dart';
 
 import 'package:file_selector/file_selector.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,7 +14,7 @@ class PerfilPostulanteScreen extends StatefulWidget {
   const PerfilPostulanteScreen({super.key});
 
   @override
-  _PerfilPostulanteScreenState createState() => _PerfilPostulanteScreenState();
+  PerfilPostulanteScreenState createState() => PerfilPostulanteScreenState();
 }
 
 Future<String?> subirDocumentoCertificacion(
@@ -45,7 +44,7 @@ Future<String?> subirDocumentoCertificacion(
   }
 }
 
-class _PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
+class PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _carreraController = TextEditingController();
@@ -156,6 +155,11 @@ class _PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
           _latitud = data['latitud'];
           _longitud = data['longitud'];
         });
+        
+        // Actualizar coordenadas basadas en la comuna si no las tenemos o son inválidas
+        if (_comunaSeleccionada != null && (_latitud == null || _longitud == null)) {
+          _actualizarCoordenadasDeComuna();
+        }
       }
     } catch (e) {
       print('Error al cargar perfil: $e');
@@ -163,42 +167,9 @@ class _PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
   }
 
   Future<void> solicitarUbicacionAlEntrar() async {
-    try {
-      Position pos = await _detectarUbicacion();
-      setState(() {
-        _latitud = pos.latitude;
-        _longitud = pos.longitude;
-      });
-
-      print(
-        'Ubicación detectada automáticamente: ${pos.latitude}, ${pos.longitude}',
-      );
-    } catch (e) {
-      print('Error al obtener ubicación automáticamente: $e');
-    }
-  }
-
-  Future<Position> _detectarUbicacion() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Los servicios de ubicación están desactivados.');
-    }
-
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Los permisos de ubicación fueron denegados');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-        'Los permisos de ubicación están denegados permanentemente.',
-      );
-    }
-
-    return await Geolocator.getCurrentPosition();
+    // Ya no necesitamos solicitar ubicación GPS
+    // Las coordenadas se actualizarán cuando se seleccione una comuna
+    print('Sistema configurado para usar coordenadas basadas en comuna seleccionada');
   }
 
   Future<void> _guardarPerfil() async {
@@ -232,10 +203,51 @@ class _PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
     }
   }
 
+  Future<Map<String, double>?> _obtenerCoordenadasComuna(String nombreComuna) async {
+    try {
+      final String response = await rootBundle.loadString(
+        'assets/data/comunas_latlng.json',
+      );
+      final List<dynamic> comunas = json.decode(response);
+      
+      for (var comuna in comunas) {
+        if (comuna['nombre'] == nombreComuna) {
+          return {
+            'lat': comuna['lat'].toDouble(),
+            'lng': comuna['lng'].toDouble(),
+          };
+        }
+      }
+      return null;
+    } catch (e) {
+      print('Error al obtener coordenadas de comuna: $e');
+      return null;
+    }
+  }
+  
+  Future<void> _actualizarCoordenadasDeComuna() async {
+    if (_comunaSeleccionada != null) {
+      final coordenadas = await _obtenerCoordenadasComuna(_comunaSeleccionada!);
+      if (coordenadas != null) {
+        setState(() {
+          _latitud = coordenadas['lat'];
+          _longitud = coordenadas['lng'];
+        });
+        print('Coordenadas actualizadas para $_comunaSeleccionada: $_latitud, $_longitud');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Perfil Postulante')),
+      backgroundColor: AppThemes.postulanteBackground,
+      appBar: AppBar(
+        title: const Text('Perfil Postulante'),
+        backgroundColor: AppThemes.postulantePrimary,
+        foregroundColor: Colors.white,
+        elevation: 2,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -293,6 +305,10 @@ class _PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
                     setState(() {
                       _comunaSeleccionada = value;
                     });
+                    // Actualizar coordenadas basadas en la comuna seleccionada
+                    if (value != null) {
+                      _actualizarCoordenadasDeComuna();
+                    }
                   },
                 ),
               const SizedBox(height: 12),
@@ -398,26 +414,21 @@ class _PerfilPostulanteScreenState extends State<PerfilPostulanteScreen> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const MatchesPostulanteScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Ver matches'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red, // rojo para el logout
                 ),
                 onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(
-                    context,
-                  ).pushNamedAndRemoveUntil('/login', (route) => false);
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Error al cerrar sesión: $e'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
                 },
                 child: const Text('Cerrar sesión'),
               ),

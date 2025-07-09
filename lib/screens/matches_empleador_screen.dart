@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tindevs_app/utils/app_themes.dart';
+import 'chat_screen.dart';
 
 class MatchesEmpleadorScreen extends StatelessWidget {
   const MatchesEmpleadorScreen({super.key});
@@ -13,7 +15,12 @@ class MatchesEmpleadorScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Matches confirmados')),
+      backgroundColor: AppThemes.empleadorBackground,
+      appBar: AppBar(
+        title: const Text('Candidatos confirmados'),
+        backgroundColor: AppThemes.empleadorPrimary,
+        foregroundColor: Colors.white,
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream:
             FirebaseFirestore.instance
@@ -28,7 +35,7 @@ class MatchesEmpleadorScreen extends StatelessWidget {
           final matches = snapshot.data?.docs ?? [];
 
           if (matches.isEmpty) {
-            return const Center(child: Text('No tienes matches aún.'));
+            return const Center(child: Text('No tienes candidatos confirmados aún.'));
           }
 
           return ListView.builder(
@@ -70,12 +77,19 @@ class MatchesEmpleadorScreen extends StatelessWidget {
                               as Map<String, dynamic>;
 
                       return Card(
-                        margin: const EdgeInsets.all(8),
-                        child: ListTile(
-                          title: Text(propuestaData['titulo'] ?? 'Sin título'),
-                          subtitle: Column(
+                        margin: const EdgeInsets.all(8),                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                propuestaData['titulo'] ?? 'Sin título',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
                               Text(
                                 'Postulante: ${postulanteData['nombre'] ?? ''}',
                               ),
@@ -86,47 +100,79 @@ class MatchesEmpleadorScreen extends StatelessWidget {
                               Text(
                                 'Fecha del Match: ${matchData['fecha'] != null ? (matchData['fecha'] as Timestamp).toDate().toLocal().toString().split(' ')[0] : ''}',
                               ),
-                            ],
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            tooltip: 'Eliminar match',
-                            onPressed: () async {
-                              final confirm = await showDialog<bool>(
-                                context: context,
-                                builder:
-                                    (context) => AlertDialog(
-                                      title: const Text('¿Eliminar match?'),
-                                      content: const Text(
-                                        'Esta acción no se puede deshacer.',
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed:
-                                              () =>
-                                                  Navigator.pop(context, false),
-                                          child: const Text('Cancelar'),
-                                        ),
-                                        TextButton(
-                                          onPressed:
-                                              () =>
-                                                  Navigator.pop(context, true),
-                                          child: const Text(
-                                            'Eliminar',
-                                            style: TextStyle(color: Colors.red),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      // Crear ID único para el chat basado en el match
+                                      final chatId = '${matchData['idPostulante']}_${matchData['idEmpleador']}_${matchData['idPropuesta']}';
+                                      
+                                      // Navegar al chat
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ChatScreen(
+                                            matchId: chatId,
+                                            otherUserId: idPostulante,
+                                            otherUserName: postulanteData['nombre'] ?? 'Postulante',
+                                            propuestaTitle: propuestaData['titulo'] ?? 'Propuesta',
+                                            isPostulante: false,
                                           ),
                                         ),
-                                      ],
+                                      );
+                                    },
+                                    icon: const Icon(Icons.chat),
+                                    label: const Text('Chatear'),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppThemes.empleadorAccent,
+                                      foregroundColor: Colors.white,
                                     ),
-                              );
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete, color: Colors.red),
+                                    tooltip: 'Eliminar match',
+                                    onPressed: () async {
+                                      final confirm = await showDialog<bool>(
+                                        context: context,
+                                        builder:
+                                            (context) => AlertDialog(
+                                          title: const Text('¿Eliminar match?'),
+                                          content: const Text(
+                                            'Esta acción no se puede deshacer.',
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed:
+                                                  () =>
+                                                      Navigator.pop(context, false),
+                                              child: const Text('Cancelar'),
+                                            ),
+                                            TextButton(
+                                              onPressed:
+                                                  () =>
+                                                      Navigator.pop(context, true),
+                                              child: const Text(
+                                                'Eliminar',
+                                                style: TextStyle(color: Colors.red),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
 
-                              if (confirm == true) {
-                                await FirebaseFirestore.instance
-                                    .collection('matches')
-                                    .doc(matches[index].id)
-                                    .delete();
-                              }
-                            },
+                                      if (confirm == true) {
+                                        await FirebaseFirestore.instance
+                                            .collection('matches')
+                                            .doc(matches[index].id)
+                                            .delete();
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       );

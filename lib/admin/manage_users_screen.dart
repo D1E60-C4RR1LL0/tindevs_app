@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'admin_home_screen.dart';
+import 'package:tindevs_app/utils/auth_errors.dart';
+import 'package:tindevs_app/main.dart';
 
 class ManageUsersScreen extends StatefulWidget {
   const ManageUsersScreen({super.key});
@@ -20,33 +21,90 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
   Future<void> _createUser() async {
     if (!_formKey.currentState!.validate()) return;
 
+    // Validaciones adicionales personalizadas
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    final name = _nameController.text.trim();
+
+    // Validar email
+    final emailError = AuthErrors.validateEmail(email);
+    if (emailError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(emailError),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Validar contraseña
+    final passwordError = AuthErrors.validatePassword(password);
+    if (passwordError != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(passwordError),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Validar nombre
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('El nombre es obligatorio.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
     try {
       // Crear usuario en Auth
       final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: email,
+        password: password,
       );
 
       // Guardar en Firestore
       await FirebaseFirestore.instance.collection('usuarios').doc(userCredential.user!.uid).set({
-        'nombre': _nameController.text.trim(),
-        'correo': _emailController.text.trim(),
+        'nombre': name,
+        'correo': email,
         'rol': _selectedRole,
         'fechaRegistro': DateTime.now(),
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Usuario creado exitosamente')),
+        const SnackBar(
+          content: Text('Usuario creado exitosamente'),
+          backgroundColor: Colors.green,
+        ),
       );
 
       _formKey.currentState!.reset();
+      _emailController.clear();
+      _passwordController.clear();
+      _nameController.clear();
       setState(() {
         _selectedRole = 'postulante';
       });
+    } on FirebaseAuthException catch (e) {
+      final customMessage = AuthErrors.getCustomErrorMessage(e.code);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(customMessage),
+          backgroundColor: Colors.red,
+        ),
+      );
     } catch (e) {
       print('Error al crear usuario: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error al crear usuario')),
+        const SnackBar(
+          content: Text('Error inesperado. Verifica tu conexión e intenta nuevamente.'),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -80,9 +138,10 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             ListTile(
               leading: const Icon(Icons.person),
               title: const Text('Usuarios'),
-              onTap: () => Navigator.pushReplacement(
+              onTap: () => Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => AdminHomeScreen()),
+                MaterialPageRoute(builder: (_) => const InitialRouter()),
+                (route) => false,
               ),
             ),
             ListTile(

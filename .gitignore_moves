@@ -1,0 +1,41 @@
+# Original files that were moved
+lib/utils/app_themes.dart
+lib/utils/auth_errors.dart
+lib/utils/distancia_util.dart
+
+lib/screens/login_screen.dart
+lib/screens/register_screen.dart
+lib/screens/welcome_screen.dart
+
+lib/screens/postulante_home_screen.dart
+lib/screens/perfil_postulante_screen.dart
+lib/screens/swipe_propuestas_screen.dart
+lib/screens/matches_postulante_screen.dart
+
+lib/screens/empleador_home_screen.dart
+lib/screens/perfil_empleador_screen.dart
+lib/screens/crear_propuesta_screen.dart
+lib/screens/gestionar_propuestas_screen.dart
+lib/screens/matches_empleador_screen.dart
+lib/screens/interesados_screen.dart
+
+lib/screens/chats_list_screen.dart
+lib/screens/chat_screen.dart
+
+lib/screens/detalle_propuesta_screen.dart
+lib/screens/detalle_postulante_screen.dart
+
+# Archivo de respaldo
+lib/screens/crear_propuesta_screen_backup.dart
+
+# Archivos generados
+*.g.dart
+*.freezed.dart
+
+# Carpeta build
+build/
+
+# Archivos de Flutter generados automáticamente
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies

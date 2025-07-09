@@ -1,0 +1,33 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "intereses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "postulanteId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "fecha",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "matches",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "idPostulante",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "fecha",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

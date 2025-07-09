@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Flutter App on Device",
+			"type": "shell",
+			"command": "flutter run -d R5CWB01Z0JZ",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}
