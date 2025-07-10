@@ -33,7 +33,7 @@ class _UsersScreenState extends State<UsersScreen> {
         color: AdminTheme.surfaceColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -98,7 +98,7 @@ class _UsersScreenState extends State<UsersScreen> {
           });
         },
         backgroundColor: AdminTheme.backgroundColor,
-        selectedColor: AdminTheme.primaryColor.withOpacity(0.2),
+        selectedColor: AdminTheme.primaryColor.withValues(alpha: 0.2),
         checkmarkColor: AdminTheme.primaryColor,
         labelStyle: TextStyle(
           color: isSelected ? AdminTheme.primaryColor : AdminTheme.textSecondary,
@@ -334,7 +334,7 @@ class _UsersScreenState extends State<UsersScreen> {
         color: AdminTheme.backgroundColor,
         borderRadius: BorderRadius.circular(AdminTheme.radiusM),
         border: Border.all(
-          color: _getEstadoColor(estado).withOpacity(0.3),
+          color: _getEstadoColor(estado).withValues(alpha: 0.3),
         ),
       ),
       child: Row(

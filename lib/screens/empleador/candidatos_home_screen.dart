@@ -325,7 +325,7 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => ChatScreen(
-                                    matchId: idPropuesta + '_' + idPostulante, // Formato de matchId
+                                    matchId: '${idPropuesta}_$idPostulante', // Formato de matchId
                                     otherUserId: idPostulante,
                                     otherUserName: postulanteData['nombre'] ?? 'Usuario',
                                     propuestaTitle: propuestaData['titulo'] ?? 'Propuesta',

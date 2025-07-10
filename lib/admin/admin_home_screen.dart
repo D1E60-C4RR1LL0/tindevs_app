@@ -237,7 +237,7 @@ class AdminHomeScreenState extends State<AdminHomeScreen> {
         vertical: AdminTheme.spacingXS,
       ),
       decoration: BoxDecoration(
-        color: isSelected ? AdminTheme.primaryColor.withOpacity(0.1) : null,
+        color: isSelected ? AdminTheme.primaryColor.withValues(alpha: 0.1) : null,
         borderRadius: BorderRadius.circular(AdminTheme.radiusM),
       ),
       child: ListTile(
@@ -256,7 +256,7 @@ class AdminHomeScreenState extends State<AdminHomeScreen> {
             ? Text(
                 subtitle,
                 style: TextStyle(
-                  color: (isSelected ? AdminTheme.primaryColor : textColor)?.withOpacity(0.7) ?? AdminTheme.textSecondary,
+                  color: (isSelected ? AdminTheme.primaryColor : textColor)?.withValues(alpha: 0.7) ?? AdminTheme.textSecondary,
                   fontSize: 12,
                 ),
               )

@@ -397,10 +397,10 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: _getValidationStatusColor(estadoValidacion).withOpacity(0.1),
+                  color: _getValidationStatusColor(estadoValidacion).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: _getValidationStatusColor(estadoValidacion).withOpacity(0.3),
+                    color: _getValidationStatusColor(estadoValidacion).withValues(alpha: 0.3),
                   ),
                 ),
                 child: Row(
@@ -902,7 +902,7 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
               print('Error procesando certificación: $e');
               return const SizedBox.shrink();
             }
-          }).toList(),
+          }),
         ];
       }
       return [];

@@ -44,8 +44,8 @@ class AdminTheme {
         primary: primaryColor,
         secondary: accentColor,
         error: errorColor,
-        background: backgroundColor,
-        surface: surfaceColor,
+        surface: backgroundColor,
+        surfaceContainerHighest: surfaceColor,
       ),
       scaffoldBackgroundColor: backgroundColor,
       
@@ -115,12 +115,12 @@ class AdminTheme {
       
       // DataTable theme
       dataTableTheme: const DataTableThemeData(
-        headingRowColor: MaterialStatePropertyAll(primaryColor),
+        headingRowColor: WidgetStatePropertyAll(primaryColor),
         headingTextStyle: TextStyle(
           color: textLight,
           fontWeight: FontWeight.w600,
         ),
-        dataRowColor: MaterialStatePropertyAll(surfaceColor),
+        dataRowColor: WidgetStatePropertyAll(surfaceColor),
         columnSpacing: spacingL,
         horizontalMargin: spacingM,
       ),
@@ -225,9 +225,9 @@ class AdminTheme {
         vertical: spacingXS,
       ),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(radiusS),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Text(
         label,

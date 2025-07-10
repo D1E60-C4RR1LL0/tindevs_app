@@ -248,7 +248,7 @@ class DetallePropuestaScreen extends StatelessWidget {
                   
                   // Botón de acción (solo si no viene de intereses)
                   if (isFromInterests != true)
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton.icon(

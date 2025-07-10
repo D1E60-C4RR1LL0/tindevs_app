@@ -33,7 +33,7 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
         color: AdminTheme.surfaceColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -98,7 +98,7 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
           });
         },
         backgroundColor: AdminTheme.backgroundColor,
-        selectedColor: AdminTheme.primaryColor.withOpacity(0.2),
+        selectedColor: AdminTheme.primaryColor.withValues(alpha: 0.2),
         checkmarkColor: AdminTheme.primaryColor,
         labelStyle: TextStyle(
           color: isSelected ? AdminTheme.primaryColor : AdminTheme.textSecondary,
@@ -338,8 +338,8 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
                           padding: const EdgeInsets.all(AdminTheme.spacingS),
                           decoration: BoxDecoration(
                             color: estado == 'pendiente' 
-                                ? AdminTheme.warningColor.withOpacity(0.1) 
-                                : AdminTheme.accentColor.withOpacity(0.1),
+                                ? AdminTheme.warningColor.withValues(alpha: 0.1) 
+                                : AdminTheme.accentColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(AdminTheme.radiusS),
                             border: Border.all(
                               color: estado == 'pendiente' 
@@ -479,9 +479,9 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
                 margin: const EdgeInsets.only(top: AdminTheme.spacingS),
                 padding: const EdgeInsets.all(AdminTheme.spacingM),
                 decoration: BoxDecoration(
-                  color: AdminTheme.warningColor.withOpacity(0.1),
+                  color: AdminTheme.warningColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AdminTheme.radiusM),
-                  border: Border.all(color: AdminTheme.warningColor.withOpacity(0.3)),
+                  border: Border.all(color: AdminTheme.warningColor.withValues(alpha: 0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -510,7 +510,7 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
                     Text(
                       'El empleador no ha subido un documento de validación para verificar la vigencia de esta propuesta.',
                       style: TextStyle(
-                        color: AdminTheme.warningColor.withOpacity(0.8),
+                        color: AdminTheme.warningColor.withValues(alpha: 0.8),
                         fontSize: 12,
                       ),
                     ),
@@ -832,9 +832,9 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
               Container(
                 padding: const EdgeInsets.all(AdminTheme.spacingM),
                 decoration: BoxDecoration(
-                  color: AdminTheme.accentColor.withOpacity(0.1),
+                  color: AdminTheme.accentColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(AdminTheme.radiusM),
-                  border: Border.all(color: AdminTheme.accentColor.withOpacity(0.3)),
+                  border: Border.all(color: AdminTheme.accentColor.withValues(alpha: 0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1012,9 +1012,9 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
             Container(
               padding: const EdgeInsets.all(AdminTheme.spacingM),
               decoration: BoxDecoration(
-                color: AdminTheme.errorColor.withOpacity(0.1),
+                color: AdminTheme.errorColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AdminTheme.radiusM),
-                border: Border.all(color: AdminTheme.errorColor.withOpacity(0.3)),
+                border: Border.all(color: AdminTheme.errorColor.withValues(alpha: 0.3)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1290,21 +1290,6 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
         'solicitudDocumentoFecha': FieldValue.serverTimestamp(),
         'solicitudDocumentoEnviada': true,
       });
-
-      // Crear notificación para el empleador (si existe la colección de notificaciones)
-      if (empleadorId.isNotEmpty) {
-        await FirebaseFirestore.instance
-            .collection('notificaciones')
-            .add({
-          'empleadorId': empleadorId,
-          'propuestaId': propuestaId,
-          'tipo': 'solicitud_documento',
-          'titulo': 'Documento de validación requerido',
-          'mensaje': 'Se requiere que suba un documento para validar la vigencia de su propuesta.',
-          'fecha': FieldValue.serverTimestamp(),
-          'leida': false,
-        });
-      }
 
       if (mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();

@@ -509,35 +509,6 @@ class SwipePropuestasScreenState extends State<SwipePropuestasScreen> {
                       reinicioTimer.cancel();
                       operacionCompletada = true;
 
-                      // Mostrar notificación de éxito
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(Icons.refresh, color: Colors.white, size: 20),
-                                const SizedBox(width: 8),
-                                Flexible(
-                                  child: Text(
-                                    '¡Propuestas reiniciadas! ($eliminados)',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            backgroundColor: AppThemes.postulanteAccent,
-                            behavior: SnackBarBehavior.floating,
-                            width: 280, // Ancho fijo para el SnackBar
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            margin: const EdgeInsets.all(16),
-                          ),
-                        );
-                      }
-
                       // Cargar las propuestas inmediatamente después de eliminar dislikes
                       await cargarPropuestas();
 

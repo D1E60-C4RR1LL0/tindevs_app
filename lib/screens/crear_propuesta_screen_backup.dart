@@ -609,7 +609,7 @@ class _CrearPropuestaScreenState extends State<CrearPropuestaScreen> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: AppThemes.empleadorSecondary.withOpacity(0.1),
+                                  color: Color.fromRGBO(102, 187, 106, 0.1),
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(color: AppThemes.empleadorSecondary),
                                 ),
@@ -694,9 +694,9 @@ class _CrearPropuestaScreenState extends State<CrearPropuestaScreen> {
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: AppThemes.empleadorPrimary.withOpacity(0.05),
+                            color: Color.fromRGBO(27, 94, 32, 0.05),
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: AppThemes.empleadorPrimary.withOpacity(0.2)),
+                            border: Border.all(color: Color.fromRGBO(27, 94, 32, 0.2)),
                           ),
                           child: Row(
                             children: [
@@ -723,7 +723,7 @@ class _CrearPropuestaScreenState extends State<CrearPropuestaScreen> {
                         const SizedBox(height: 16),
                         
                         // Botón para seleccionar documento
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: OutlinedButton.icon(
                             onPressed: _seleccionarDocumento,
@@ -753,7 +753,7 @@ class _CrearPropuestaScreenState extends State<CrearPropuestaScreen> {
                             margin: const EdgeInsets.only(top: 16),
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: AppThemes.empleadorSecondary.withOpacity(0.1),
+                              color: Color.fromRGBO(102, 187, 106, 0.1),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(color: AppThemes.empleadorSecondary),
                             ),
@@ -796,15 +796,14 @@ class _CrearPropuestaScreenState extends State<CrearPropuestaScreen> {
                               ],
                             ),
                           ),
-                        ],
-                      ),
+                      ],
                     ),
                   ),
-                ],
+                ),
                 const SizedBox(height: 24),
                 
                 // Botón de acción
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
@@ -816,7 +815,7 @@ class _CrearPropuestaScreenState extends State<CrearPropuestaScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      shadowColor: AppThemes.empleadorPrimary.withOpacity(0.4),
+                      shadowColor: Color.fromRGBO(27, 94, 32, 0.4),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
