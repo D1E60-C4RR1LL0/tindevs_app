@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tindevs_app/utils/auth_errors.dart';
+import 'package:tindevs_app/utils/helpers/auth_errors.dart';
 import 'package:tindevs_app/main.dart';
-import 'perfil_postulante_screen.dart';
-import 'perfil_empleador_screen.dart';
+import 'postulante/perfil_postulante_screen.dart';
+import 'empleador/perfil_empleador_screen.dart';
 
 
 class RegisterScreen extends StatefulWidget {

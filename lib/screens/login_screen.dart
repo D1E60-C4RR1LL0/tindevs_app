@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tindevs_app/screens/empleador_home_screen.dart';
-import 'package:tindevs_app/screens/postulante_home_screen.dart';
+import 'package:tindevs_app/screens/empleador/empleador_home_screen.dart';
+import 'package:tindevs_app/screens/postulante/postulante_home_screen.dart';
 import 'package:tindevs_app/screens/register_screen.dart';
-import 'package:tindevs_app/utils/auth_errors.dart';
+import 'package:tindevs_app/utils/helpers/auth_errors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

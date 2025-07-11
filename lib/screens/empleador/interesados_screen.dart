@@ -533,11 +533,19 @@ class _InteresadosScreenState extends State<InteresadosScreen>
                       Expanded(
                         child: OutlinedButton.icon(
                           onPressed: () => _mostrarPerfilCompleto(postulanteData, perfilData),
-                          icon: const Icon(Icons.person, size: 16),
-                          label: const Text('Ver Perfil'),
+                          icon: const Icon(Icons.person, size: 14),
+                          label: const Text(
+                            'Ver Perfil',
+                            style: TextStyle(fontSize: 12),
+                          ),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: AppThemes.empleadorPrimary,
                             side: BorderSide(color: AppThemes.empleadorPrimary),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            minimumSize: const Size(0, 36),
                           ),
                         ),
                       ),
@@ -551,11 +559,19 @@ class _InteresadosScreenState extends State<InteresadosScreen>
                               nombre,
                               propuestaData['titulo'] ?? 'Propuesta',
                             ),
-                            icon: const Icon(Icons.chat, size: 16),
-                            label: const Text('Chatear'),
+                            icon: const Icon(Icons.chat, size: 14),
+                            label: const Text(
+                              'Chatear',
+                              style: TextStyle(fontSize: 12),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppThemes.empleadorAccent,
                               foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(0, 36),
                             ),
                           ),
                         ),
@@ -563,11 +579,19 @@ class _InteresadosScreenState extends State<InteresadosScreen>
                         Expanded(
                           child: ElevatedButton.icon(
                             onPressed: () => _confirmarMatch(idPropuesta, idPostulante),
-                            icon: const Icon(Icons.check, size: 16),
-                            label: const Text('Aceptar'),
+                            icon: const Icon(Icons.check, size: 14),
+                            label: const Text(
+                              'Aceptar',
+                              style: TextStyle(fontSize: 12),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(0, 36),
                             ),
                           ),
                         ),
@@ -575,11 +599,19 @@ class _InteresadosScreenState extends State<InteresadosScreen>
                         Expanded(
                           child: ElevatedButton.icon(
                             onPressed: () => _rechazarCandidato(idPropuesta, idPostulante),
-                            icon: const Icon(Icons.close, size: 16),
-                            label: const Text('Rechazar'),
+                            icon: const Icon(Icons.close, size: 14),
+                            label: const Text(
+                              'Rechazar',
+                              style: TextStyle(fontSize: 12),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(0, 36),
                             ),
                           ),
                         ),
@@ -651,11 +683,19 @@ class _InteresadosScreenState extends State<InteresadosScreen>
             ),
             trailing: ElevatedButton.icon(
               onPressed: () => _abrirChat(idPropuesta, idPostulante, nombre, tituloPropuesta),
-              icon: const Icon(Icons.chat, size: 16),
-              label: const Text('Chat'),
+              icon: const Icon(Icons.chat, size: 14),
+              label: const Text(
+                'Chat',
+                style: TextStyle(fontSize: 12),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppThemes.empleadorAccent,
                 foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                minimumSize: const Size(0, 36),
               ),
             ),
           ),

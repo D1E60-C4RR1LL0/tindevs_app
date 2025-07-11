@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'postulante_home_screen.dart';
-import 'empleador_home_screen.dart';
+import 'postulante/postulante_home_screen.dart';
+import 'empleador/empleador_home_screen.dart';
 import 'login_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {

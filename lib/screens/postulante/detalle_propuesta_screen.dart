@@ -79,10 +79,10 @@ class DetallePropuestaScreen extends StatelessWidget {
                           color: Colors.green[100]!,
                           textColor: Colors.green[800]!,
                         ),
-                      if (propuesta.containsKey('experienciaMinima'))
+                      if (propuesta.containsKey('experienciaMinima') || propuesta.containsKey('experiencia'))
                         _buildInfoBadge(
                           icon: Icons.star_outline,
-                          text: '${propuesta['experienciaMinima']} años exp.',
+                          text: '${propuesta['experienciaMinima'] ?? propuesta['experiencia']} años exp.',
                           color: Colors.orange[100]!,
                           textColor: Colors.orange[800]!,
                         ),
@@ -149,19 +149,20 @@ class DetallePropuestaScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (propuesta.containsKey('experienciaMinima'))
+                        if (propuesta.containsKey('experienciaMinima') || propuesta.containsKey('experiencia'))
                           _buildInfoRow(
                             label: 'Años de experiencia:',
-                            value: '${propuesta['experienciaMinima']} años',
+                            value: '${propuesta['experienciaMinima'] ?? propuesta['experiencia']} años',
                           ),
-                        if (propuesta.containsKey('carreraRequerida'))
+                        if (propuesta.containsKey('carreraRequerida') || propuesta.containsKey('carrera'))
                           _buildInfoRow(
                             label: 'Carrera requerida:',
-                            value: propuesta['carreraRequerida'],
+                            value: propuesta['carreraRequerida'] ?? propuesta['carrera'],
                           ),
-                        if (propuesta.containsKey('certificacionRequerida') && 
-                            propuesta['certificacionRequerida'] != null &&
-                            propuesta['certificacionRequerida'].toString().isNotEmpty)
+                        if ((propuesta.containsKey('certificacionRequerida') || propuesta.containsKey('certificacion')) &&
+                            (propuesta['certificacionRequerida'] != null || propuesta['certificacion'] != null) &&
+                            (propuesta['certificacionRequerida']?.toString().isNotEmpty == true || 
+                             propuesta['certificacion']?.toString().isNotEmpty == true))
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Column(
@@ -185,7 +186,7 @@ class DetallePropuestaScreen extends StatelessWidget {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
-                                        propuesta['certificacionRequerida'],
+                                        propuesta['certificacionRequerida'] ?? propuesta['certificacion'],
                                         style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.black87,
@@ -214,13 +215,6 @@ class DetallePropuestaScreen extends StatelessWidget {
                           label: 'Ubicación:',
                           value: propuesta['comuna'] ?? 'No especificada',
                         ),
-                        if (propuesta.containsKey('fechaPublicacion'))
-                          _buildInfoRow(
-                            label: 'Fecha de publicación:',
-                            value: propuesta['fechaPublicacion'] != null 
-                                ? propuesta['fechaPublicacion'].toString().split(' ')[0]
-                                : 'No especificada',
-                          ),
                       ],
                     ),
                   ),

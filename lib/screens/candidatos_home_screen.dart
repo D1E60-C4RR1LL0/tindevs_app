@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:tindevs_app/utils/app_themes.dart';
-import 'package:tindevs_app/utils/distancia_util.dart';
-import 'chat_screen.dart';
+import 'package:tindevs_app/utils/themes/app_themes.dart';
+import 'package:tindevs_app/utils/helpers/distancia_util.dart';
+import 'package:tindevs_app/screens/chat/chat_screen.dart';
 
 class CandidatosHomeScreen extends StatefulWidget {
   const CandidatosHomeScreen({super.key});
@@ -638,7 +638,11 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
                           style: OutlinedButton.styleFrom(
                             foregroundColor: AppThemes.empleadorPrimary,
                             side: BorderSide(color: AppThemes.empleadorPrimary),
-                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            minimumSize: const Size(0, 36),
                           ),
                         ),
                       ),
@@ -657,7 +661,11 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppThemes.empleadorAccent,
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(0, 36),
                             ),
                           ),
                         ),
@@ -670,7 +678,11 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(0, 36),
                             ),
                           ),
                         ),
@@ -683,7 +695,11 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              minimumSize: const Size(0, 36),
                             ),
                           ),
                         ),
@@ -762,7 +778,11 @@ class _CandidatosHomeScreenState extends State<CandidatosHomeScreen>
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppThemes.empleadorAccent,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                minimumSize: const Size(0, 36),
               ),
             ),
           ),
