@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinDevs - Visualizador de Firestore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            height: calc(100vh - 200px);
+        }
+
+        .collections-sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .tree-view {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .collection-node {
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .collection-node:hover {
+            background-color: #f5f5f5;
+        }
+
+        .collection-node.selected {
+            background-color: #e3f2fd;
+            border-left: 4px solid #1976d2;
+        }
+
+        .collection-icon {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .collection-name {
+            font-weight: bold;
+            color: #1976d2;
+            flex-grow: 1;
+        }
+
+        .collection-count {
+            background: #e0e0e0;
+            color: #666;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .document-node {
+            margin: 2px 0;
+            padding: 6px 8px;
+            margin-left: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .document-node:hover {
+            background-color: #f0f0f0;
+        }
+
+        .document-node.selected {
+            background-color: #fff3e0;
+            border-left: 3px solid #ff9800;
+        }
+
+        .document-icon {
+            font-size: 14px;
+            width: 16px;
+            text-align: center;
+            color: #ff9800;
+        }
+
+        .document-name {
+            color: #333;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex-grow: 1;
+        }
+
+        .expand-toggle {
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .expand-toggle.expanded {
+            transform: rotate(90deg);
+        }
+
+        .loading-collection {
+            margin-left: 32px;
+            color: #666;
+            font-size: 12px;
+            padding: 4px 0;
+        }
+
+        .documents-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .document-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .document-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .document-path {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #666;
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .document-id {
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .field-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .field-row {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .field-key {
+            font-weight: bold;
+            color: #333;
+            min-width: 150px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .field-value {
+            flex-grow: 1;
+            color: #666;
+            word-break: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .field-type {
+            min-width: 80px;
+            text-align: right;
+            color: #999;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .subcollection-section {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .subcollection-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subcollection-item {
+            background: #e3f2fd;
+            padding: 8px 12px;
+            margin: 4px 0;
+            border-radius: 4px;
+            border-left: 4px solid #1976d2;
+        }
+
+        .firebase-style {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3182ce;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .document-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .document-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .document-header {
+            background: #6c757d;
+            color: white;
+            padding: 12px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .document-body {
+            padding: 16px;
+            display: none;
+        }
+
+        .document-body.expanded {
+            display: block;
+        }
+
+        .document-field {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid #3182ce;
+        }
+
+        .field-name {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .field-value {
+            color: #4a5568;
+            word-break: break-word;
+        }
+
+        .field-type {
+            font-size: 0.8em;
+            color: #718096;
+            font-style: italic;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .subcollection {
+            margin-left: 20px;
+            margin-top: 10px;
+            padding: 10px;
+            background: #e6fffa;
+            border-radius: 6px;
+            border-left: 4px solid #38b2ac;
+        }
+
+        .subcollection-header {
+            font-weight: bold;
+            color: #2c7a7b;
+            margin-bottom: 10px;
+        }
+
+        .auth-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .auth-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .auth-input {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        .auth-button {
+            padding: 8px 16px;
+            background: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .auth-button:hover {
+            background: #2c5282;
+        }
+
+        .auth-button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        .auth-status {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .auth-status.success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .auth-status.error {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #e6fffa;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .logout-button {
+            padding: 6px 12px;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .logout-button:hover {
+            background: #c53030;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 TinDevs - Visualizador de Firestore</h1>
+            <p>Explora todas las colecciones y documentos de la base de datos</p>
+        </div>
+
+        <div class="auth-section">
+            <div id="auth-container">
+                <div class="auth-form">
+                    <input type="email" id="email-input" class="auth-input" placeholder="Email">
+                    <input type="password" id="password-input" class="auth-input" placeholder="Contraseña">
+                    <button id="login-button" class="auth-button">Iniciar Sesión</button>
+                </div>
+                <div id="auth-status"></div>
+            </div>
+        </div>
+
+        <div class="collections-grid">
+            <div class="collections-sidebar">
+                <h3>📁 Estructura de Base de Datos</h3>
+                <div id="collections-tree" class="tree-view">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Cargando estructura...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="documents-panel">
+                <div id="document-viewer">
+                    <div class="no-data">
+                        <h3>👈 Selecciona un documento para ver sus detalles</h3>
+                        <p>Haz clic en cualquier documento del árbol para explorar sus campos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: 'AIzaSyAEVhCpib7-RxArmbupn-l4f6G9yQJ5iJc',
+            appId: '1:305613084851:web:718b0719cd69c807fb38c6',
+            messagingSenderId: '305613084851',
+            projectId: 'tindevs-1f6ed',
+            authDomain: 'tindevs-1f6ed.firebaseapp.com',
+            storageBucket: 'tindevs-1f6ed.appspot.com',
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Variables globales
+        let currentCollection = null;
+        let currentDocument = null;
+        let currentUser = null;
+        let collectionsData = {};
+        let collections = [
+            'chats',
+            'dislikes',
+            'empleador_ratings',
+            'intereses',
+            'likes',
+            'matches',
+            'propuestas',
+            'usuarios'
+        ];
+
+        // Elementos DOM
+        const collectionsTreeEl = document.getElementById('collections-tree');
+        const documentViewerEl = document.getElementById('document-viewer');
+        const authContainerEl = document.getElementById('auth-container');
+
+        // Manejar cambios de autenticación
+        auth.onAuthStateChanged((user) => {
+            currentUser = user;
+            if (user) {
+                showAuthenticatedState();
+                loadCollections();
+            } else {
+                showLoginForm();
+            }
+        });
+
+        // Mostrar estado autenticado
+        function showAuthenticatedState() {
+            authContainerEl.innerHTML = `
+                <div class="user-info">
+                    <span>✅ Conectado como: ${currentUser.email}</span>
+                    <button id="logout-button" class="logout-button">Cerrar Sesión</button>
+                </div>
+            `;
+            
+            document.getElementById('logout-button').addEventListener('click', () => {
+                auth.signOut();
+            });
+        }
+
+        // Mostrar formulario de login
+        function showLoginForm() {
+            authContainerEl.innerHTML = `
+                <div class="auth-form">
+                    <input type="email" id="email-input" class="auth-input" placeholder="Email">
+                    <input type="password" id="password-input" class="auth-input" placeholder="Contraseña">
+                    <button id="login-button" class="auth-button">Iniciar Sesión</button>
+                </div>
+                <div id="auth-status"></div>
+            `;
+            
+            // Reasignar elementos del DOM
+            const emailInput = document.getElementById('email-input');
+            const passwordInput = document.getElementById('password-input');
+            const loginButton = document.getElementById('login-button');
+            const authStatus = document.getElementById('auth-status');
+            
+            // Función de login
+            async function handleLogin() {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                
+                if (!email || !password) {
+                    showAuthStatus('Por favor ingresa email y contraseña', 'error');
+                    return;
+                }
+                
+                loginButton.disabled = true;
+                loginButton.textContent = 'Iniciando sesión...';
+                
+                try {
+                    await auth.signInWithEmailAndPassword(email, password);
+                    showAuthStatus('¡Sesión iniciada correctamente!', 'success');
+                } catch (error) {
+                    console.error('Error de login:', error);
+                    showAuthStatus(`Error: ${error.message}`, 'error');
+                    loginButton.disabled = false;
+                    loginButton.textContent = 'Iniciar Sesión';
+                }
+            }
+            
+            // Event listeners
+            loginButton.addEventListener('click', handleLogin);
+            emailInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+            
+            // Mostrar estado de autenticación
+            function showAuthStatus(message, type) {
+                authStatus.textContent = message;
+                authStatus.className = `auth-status ${type}`;
+                authStatus.style.display = 'block';
+            }
+            
+            // Limpiar la vista de colecciones
+            collectionsTreeEl.innerHTML = `
+                <div class="no-data">
+                    <h3>🔒 Autenticación requerida</h3>
+                    <p>Inicia sesión para ver la estructura</p>
+                </div>
+            `;
+            
+            documentViewerEl.innerHTML = `
+                <div class="no-data">
+                    <h3>🔒 Autenticación requerida</h3>
+                    <p>Inicia sesión para explorar los documentos</p>
+                </div>
+            `;
+        }
+
+        // Cargar colecciones y crear vista de árbol
+        async function loadCollections() {
+            if (!currentUser) {
+                showLoginForm();
+                return;
+            }
+            
+            try {
+                collectionsTreeEl.innerHTML = '<div class="loading-collection">Cargando estructura...</div>';
+                
+                let treeHtml = '';
+                
+                for (const collectionName of collections) {
+                    try {
+                        const count = await getCollectionCount(collectionName);
+                        
+                        treeHtml += `
+                            <div class="collection-node" data-collection="${collectionName}">
+                                <span class="expand-toggle" id="toggle-${collectionName}">▶</span>
+                                <span class="collection-icon">📁</span>
+                                <span class="collection-name">${collectionName}</span>
+                                <span class="collection-count">${count}</span>
+                            </div>
+                            <div class="documents-container" id="docs-${collectionName}" style="display: none;">
+                                <div class="loading-collection">Cargando documentos...</div>
+                            </div>
+                        `;
+                    } catch (error) {
+                        console.warn(`Error accessing collection ${collectionName}:`, error);
+                        treeHtml += `
+                            <div class="collection-node" data-collection="${collectionName}" style="opacity: 0.5;">
+                                <span class="collection-icon">📁</span>
+                                <span class="collection-name">${collectionName}</span>
+                                <span class="collection-count">⚠️</span>
+                            </div>
+                        `;
+                    }
+                }
+
+                collectionsTreeEl.innerHTML = treeHtml;
+                
+                // Agregar event listeners para expandir/contraer colecciones
+                document.querySelectorAll('.collection-node').forEach(node => {
+                    node.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const collectionName = node.dataset.collection;
+                        toggleCollection(collectionName);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading collections:', error);
+                collectionsTreeEl.innerHTML = `
+                    <div class="error">
+                        Error cargando estructura: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Expandir/contraer colección
+        async function toggleCollection(collectionName) {
+            const toggle = document.getElementById(`toggle-${collectionName}`);
+            const container = document.getElementById(`docs-${collectionName}`);
+            const collectionNode = document.querySelector(`[data-collection="${collectionName}"]`);
+            
+            if (container.style.display === 'none') {
+                // Expandir
+                toggle.textContent = '▼';
+                toggle.classList.add('expanded');
+                container.style.display = 'block';
+                collectionNode.classList.add('selected');
+                
+                // Cargar documentos si no están cargados
+                if (!collectionsData[collectionName]) {
+                    await loadDocuments(collectionName);
+                }
+            } else {
+                // Contraer
+                toggle.textContent = '▶';
+                toggle.classList.remove('expanded');
+                container.style.display = 'none';
+                collectionNode.classList.remove('selected');
+                
+                // Limpiar selección de documentos
+                document.querySelectorAll('.document-node').forEach(node => {
+                    node.classList.remove('selected');
+                });
+            }
+        }
+
+        // Cargar documentos de una colección
+        async function loadDocuments(collectionName) {
+            const container = document.getElementById(`docs-${collectionName}`);
+            
+            try {
+                const snapshot = await db.collection(collectionName).limit(20).get();
+                const documents = [];
+                
+                snapshot.forEach(doc => {
+                    documents.push({
+                        id: doc.id,
+                        data: doc.data()
+                    });
+                });
+                
+                collectionsData[collectionName] = documents;
+                
+                if (documents.length === 0) {
+                    container.innerHTML = '<div class="loading-collection">📭 Colección vacía</div>';
+                    return;
+                }
+                
+                let documentsHtml = '';
+                documents.forEach(doc => {
+                    documentsHtml += `
+                        <div class="document-node" data-collection="${collectionName}" data-doc-id="${doc.id}">
+                            <span class="document-icon">📄</span>
+                            <span class="document-name">${doc.id}</span>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = documentsHtml;
+                
+                // Agregar event listeners para documentos
+                container.querySelectorAll('.document-node').forEach(node => {
+                    node.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const docId = node.dataset.docId;
+                        const collection = node.dataset.collection;
+                        selectDocument(collection, docId);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading documents:', error);
+                container.innerHTML = `<div class="loading-collection" style="color: red;">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Seleccionar documento
+        function selectDocument(collectionName, docId) {
+            // Limpiar selecciones anteriores
+            document.querySelectorAll('.document-node').forEach(node => {
+                node.classList.remove('selected');
+            });
+            
+            // Seleccionar documento actual
+            const docNode = document.querySelector(`[data-collection="${collectionName}"][data-doc-id="${docId}"]`);
+            if (docNode) {
+                docNode.classList.add('selected');
+            }
+            
+            // Mostrar detalles del documento
+            const docData = collectionsData[collectionName]?.find(doc => doc.id === docId);
+            if (docData) {
+                displayDocument(collectionName, docId, docData.data);
+            }
+        }
+
+        // Mostrar documento
+        function displayDocument(collectionName, docId, data) {
+            const path = `/${collectionName}/${docId}`;
+            
+            let fieldsHtml = '';
+            Object.entries(data).forEach(([key, value]) => {
+                const valueStr = formatValue(value);
+                const type = getValueType(value);
+                
+                fieldsHtml += `
+                    <div class="field-row">
+                        <div class="field-key">${key}</div>
+                        <div class="field-value">${valueStr}</div>
+                        <div class="field-type">${type}</div>
+                    </div>
+                `;
+            });
+            
+            documentViewerEl.innerHTML = `
+                <div class="document-details firebase-style">
+                    <div class="document-header-info">
+                        <div>
+                            <div class="document-path">${path}</div>
+                            <div class="document-id">ID: ${docId}</div>
+                        </div>
+                    </div>
+                    <div class="field-list">
+                        ${fieldsHtml}
+                    </div>
+                    <div id="subcollections-${docId}"></div>
+                </div>
+            `;
+            
+            // Cargar subcolecciones si es necesario
+            if (collectionName === 'chats') {
+                loadSubcollectionForDocument(collectionName, docId);
+            }
+        }
+
+        // Cargar subcolecciones
+        async function loadSubcollectionForDocument(collectionName, docId) {
+            const subcollectionEl = document.getElementById(`subcollections-${docId}`);
+            
+            try {
+                const snapshot = await db.collection(collectionName).doc(docId).collection('messages').limit(5).get();
+                
+                if (snapshot.empty) {
+                    return;
+                }
+                
+                const messages = [];
+                snapshot.forEach(doc => {
+                    messages.push({ id: doc.id, data: doc.data() });
+                });
+                
+                let messagesHtml = '';
+                messages.forEach(msg => {
+                    messagesHtml += `
+                        <div class="subcollection-item">
+                            <strong>📄 ${msg.id}</strong><br>
+                            ${Object.entries(msg.data).map(([key, value]) => 
+                                `<span style="color: #666;">${key}:</span> ${formatValue(value)}`
+                            ).join('<br>')}
+                        </div>
+                    `;
+                });
+                
+                subcollectionEl.innerHTML = `
+                    <div class="subcollection-section">
+                        <div class="subcollection-title">
+                            <span>📂</span>
+                            <span>Subcolección: messages (${messages.length})</span>
+                        </div>
+                        ${messagesHtml}
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Error loading subcollection:', error);
+            }
+        }
+
+        // Obtener conteo de documentos en colección
+        async function getCollectionCount(collectionName) {
+            try {
+                const snapshot = await db.collection(collectionName).get();
+                return snapshot.size;
+            } catch (error) {
+                return '?';
+            }
+        }
+
+        // Formatear valor para mostrar
+        function formatValue(value) {
+            if (value === null) return 'null';
+            if (value === undefined) return 'undefined';
+            if (typeof value === 'boolean') return value.toString();
+            if (typeof value === 'number') return value.toString();
+            if (typeof value === 'string') return `"${value}"`;
+            if (value instanceof Date) return value.toLocaleString();
+            if (value && value.toDate) return value.toDate().toLocaleString();
+            if (Array.isArray(value)) return JSON.stringify(value, null, 2);
+            if (typeof value === 'object') return JSON.stringify(value, null, 2);
+            return value.toString();
+        }
+
+        // Obtener tipo de valor
+        function getValueType(value) {
+            if (value === null) return 'null';
+            if (value === undefined) return 'undefined';
+            if (typeof value === 'boolean') return 'boolean';
+            if (typeof value === 'number') return 'number';
+            if (typeof value === 'string') return 'string';
+            if (value instanceof Date) return 'date';
+            if (value && value.toDate) return 'timestamp';
+            if (Array.isArray(value)) return 'array';
+            if (typeof value === 'object') return 'object';
+            return 'unknown';
+        }
+
+        // Inicializar aplicación
+        // La aplicación se inicializa automáticamente cuando cambia el estado de autenticación
+    </script>
+</body>
+</html>
